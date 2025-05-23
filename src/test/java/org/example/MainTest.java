@@ -8,13 +8,13 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
-    @Test
-    void testLevenshtein() {
-        assertEquals(0, Main.levenshtein("test", "test"));
-        assertEquals(1, Main.levenshtein("test", "tent"));
-        assertEquals(3, Main.levenshtein("kitten", "sitting"));
-        assertEquals(5, Main.levenshtein("spark", ""));
-    }
+//    @Test
+//    void testLevenshtein() {
+//        assertEquals(0, Main.levenshtein("test", "test"));
+//        assertEquals(1, Main.levenshtein("test", "tent"));
+//        assertEquals(3, Main.levenshtein("kitten", "sitting"));
+//        assertEquals(5, Main.levenshtein("spark", ""));
+//    }
 
     @Test
     void testSimilarity() {
@@ -38,5 +38,30 @@ class MainTest {
 
         assertTrue(googleGroupFound);
         assertTrue(sampleGroupFound);
+    }
+
+    @Test
+    public void testLevenshtein() {
+
+        //Stringuri identici
+        assertEquals(0,Main.levenshtein("test","test"));
+
+        //Stringuri Goale
+
+        assertEquals(0,Main.levenshtein("",""));
+        assertEquals(4,Main.levenshtein("","test"));
+        assertEquals(4,Main.levenshtein("test",""));
+
+        //Cazuri simple
+
+        assertEquals(3, Main.levenshtein("kitten", "sitting"));
+        assertEquals(1, Main.levenshtein("cat", "cats"));
+        assertEquals(1, Main.levenshtein("cat", "cut"));
+        assertEquals(2, Main.levenshtein("flaw", "lawn"));
+
+        //Sensibilitate UpperCase
+        assertEquals(1, Main.levenshtein("Test", "test"));
+
+        assertEquals(4, Main.levenshtein("abcd", "wxyz"));
     }
 }
